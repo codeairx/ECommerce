@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'ACCOUNTS.apps.AccountsConfig',
     'HOME.apps.HomeConfig',
     'SELLER.apps.SellerConfig',
+    'PRODUCT.apps.ProductConfig',
 
     # all auth
     'allauth',

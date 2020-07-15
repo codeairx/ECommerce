@@ -18,22 +18,21 @@ class ShopFeedback(models.Model):
 
 
 class ShopRegistration(models.Model):
-    shop_owner = models.OneToOneField(ShopOwnerDetails, on_delete=models.CASCADE)
-    shop_name = models.CharField(max_length=255)
-    shop_address = models.TextField()
-    shop_description = models.TextField()
-    shop_email_address = models.EmailField()
-    shop_verified = models.BooleanField(default=False)
-    shop_feedback = models.OneToOneField(ShopFeedback, on_delete=models.CASCADE)
-
-
-class Product(models.Model):
     PRODUCTS = [
         ('Electronic', 'Electronic'),
         ('Book', 'Book'),
         ('Clothes', 'Clothes'),
         ('Grocery', 'Grocery'),
     ]
-    shop = models.OneToOneField(ShopRegistration, on_delete=models.CASCADE)
-    product_category = models.CharField(choices=PRODUCTS, max_length=100)
-    product_price = models.BigIntegerField()
+
+    shop_owner = models.OneToOneField(ShopOwnerDetails, on_delete=models.CASCADE)
+    shop_name = models.CharField(max_length=255)
+    shop_address = models.TextField()
+    shop_description = models.TextField()
+    shop_email_address = models.EmailField()
+    shop_verified = models.BooleanField(default=False)
+    shop_state = models.CharField(max_length=200)
+    shop_city = models.CharField(max_length=200)
+    shop_pincode = models.CharField(max_length=6)
+    shop_type = models.CharField(max_length=255, choices=PRODUCTS)
+    shop_feedback = models.OneToOneField(ShopFeedback, on_delete=models.CASCADE)
