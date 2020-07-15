@@ -2,10 +2,9 @@ from django.db import models
 from SELLER.models import ShopRegistration
 
 
-class Product(models.Model):
-    shop = models.OneToOneField(ShopRegistration, on_delete=models.CASCADE)
-    product_name = models.CharField(max_length=255)
-    product_description = models.TextField()
-    product_MRP = models.IntegerField()
-    product_price = models.BigIntegerField()
-    product_discount = models.IntegerField()
+class Prouduct(models.Model):
+    shop = models.ForeignKey(ShopRegistration, on_delete=models.CASCADE)
+
+
+class ProductCategory(models.Model):
+    category = models.ForeignKey(Prouduct, on_delete=models.CASCADE)
