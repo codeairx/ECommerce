@@ -30,12 +30,11 @@ class Product(models.Model):
         return str(self.id)
 
 
-# mobile section
+# MOBILE SECTION START
 class MobileSpecification(models.Model):
-    shop = models.OneToOneField(Product, on_delete=models.CASCADE)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
     brand_name = models.CharField(max_length=100)
     mobile_name = models.CharField(max_length=100)
-    starting_selling_price = models.BigIntegerField()
     mobile_display_size = models.FloatField()
     mobile_battery_capacity = models.IntegerField()
 
@@ -51,4 +50,45 @@ class Mobilevariant(models.Model):
 
     def __str__(self):
         return self.mobile.mobile_name
-    # mobile section end
+
+
+# MOBILE SECTION END
+
+# LAPTOP SECTION START
+class Laptop(models.Model):
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    brand = models.CharField(max_length=200)
+    model_name = models.TextField()
+    description = models.TextField()
+
+
+class LaptopVariant(models.Model):
+    laptop = models.ForeignKey(Laptop, on_delete=models.CASCADE)
+    processor = models.CharField(max_length=255)
+    RAM = models.IntegerField()
+    storage = models.CharField(max_length=100)
+    price_by_variant = models.BigIntegerField()
+
+
+# LAPTOP SECTION END
+
+
+# BOOK SECTION START
+class Book(models.Model):
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    book_title = models.CharField(max_length=200)
+    author = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.book_title
+
+
+class Novel(models.Model):
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    novel_title = models.CharField(max_length=255)
+    novel_author = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.novel_title
+
+# BOOK SECTION END
