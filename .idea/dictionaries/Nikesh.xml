@@ -2,8 +2,15 @@
   <dictionary name="Nikesh">
     <words>
       <w>allauth</w>
+      <w>firstname</w>
+      <w>lastname</w>
+      <w>lconf</w>
+      <w>loginbox</w>
+      <w>loginpage</w>
       <w>pincode</w>
+      <w>signuppage</w>
       <w>socialaccount</w>
+      <w>userform</w>
     </words>
   </dictionary>
 </component>
