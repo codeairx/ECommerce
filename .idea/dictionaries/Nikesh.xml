@@ -2,11 +2,14 @@
   <dictionary name="Nikesh">
     <words>
       <w>allauth</w>
+      <w>checkemail</w>
+      <w>emailcheck</w>
       <w>firstname</w>
       <w>lastname</w>
       <w>lconf</w>
       <w>loginbox</w>
       <w>loginpage</w>
+      <w>nikesh</w>
       <w>pincode</w>
       <w>signuppage</w>
       <w>socialaccount</w>
