@@ -48,6 +48,10 @@ def signup_user(request):
         return render(request, 'accounts/signuppage.html', {"form": form})
 
 
+def signup_seller(request):
+    pass
+
+
 def logout_user(request):
     logout(request)
     return redirect('homepage')

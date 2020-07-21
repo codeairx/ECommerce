@@ -1,0 +1,4 @@
+Project Completion Objectives -
+
+1. Login, Signup and Logout of normal user - done
+2. Shop Registration process - incomplete

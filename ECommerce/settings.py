@@ -34,18 +34,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.sites',
     'django.contrib.staticfiles',
     'ACCOUNTS.apps.AccountsConfig',
     'HOME.apps.HomeConfig',
     'SELLER.apps.SellerConfig',
     'PRODUCT.apps.ProductConfig',
-
-    # all auth
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
 
     'widget_tweaks',
 ]
@@ -131,8 +124,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-SITE_ID = 1
 
 STATIC_URL = '/static/'
 

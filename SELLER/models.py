@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-class ShopOwnerDetails(models.Model):
+class ShopOwnerProfile(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     shop_owner_contact_no = models.CharField(max_length=11)
     shop_owner_contact_address = models.TextField()
@@ -21,6 +21,7 @@ class ShopRegistration(models.Model):
     ]
 
     shop_owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    shop_type = models.CharField(max_length=255, choices=PRODUCTS)
     shop_name = models.CharField(max_length=255)
     shop_address = models.TextField()
     shop_description = models.TextField()
@@ -29,7 +30,6 @@ class ShopRegistration(models.Model):
     shop_state = models.CharField(max_length=200)
     shop_city = models.CharField(max_length=200)
     shop_pincode = models.CharField(max_length=6)
-    shop_type = models.CharField(max_length=255, choices=PRODUCTS)
 
     def __str__(self):
         return self.shop_name
