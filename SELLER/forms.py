@@ -20,3 +20,8 @@ class ShopOwnerBankForm(forms.ModelForm):
     class Meta:
         model = ShopOwnerBankDetails
         fields = '__all__'
+
+
+class SellerLoginForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField()

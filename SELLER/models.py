@@ -9,6 +9,7 @@ class ShopOwnerRegistration(models.Model):
     password = models.CharField(max_length=128)
     contact_address = models.TextField()
     TIN_number = models.CharField(max_length=11)
+    last_login = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.name
