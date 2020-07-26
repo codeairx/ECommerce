@@ -8,13 +8,24 @@
 {% block content %}
     <div class="container">
         <h1 style="font-family: Roboto;">Start's Your Business Online Today</h1>
-        <form method="POST" action="{% url 'shop_registration' %}">
+        <form id="shopform" method="POST" action="{% url 'shop_registration' %}">
             {% csrf_token %}
-            {% for field in form %}
+            <h2 class="mt-4">Owner Details</h2>
+            {% for field in form1 %}
+                {{ field.label_tag }}
+                {{ field|add_class:'form-control' }}
+            {% endfor %}
+            {% for field in form2 %}
+                {{ field.label_tag }}
+                {{ field|add_class:'form-control' }}
+            {% endfor %}
+            <h2 class="mt-5">Shop Details</h2>
+            {% for field in form3 %}
                 {{ field.label_tag }}
                 {{ field|add_class:'form-control' }}
             {% endfor %}
             <button class="btn btn-primary mt-2" type="submit">Next</button>
+            <button id="savebtn" class="btn btn-warning mt-2" type="button">Save</button>
         </form>
     </div>
 {% endblock content %}

@@ -35,6 +35,13 @@ class ShopRegistration(models.Model):
         return self.shop_name
 
 
+class ShopOwnerBankDetails(models.Model):
+    shop_owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    bank = models.CharField(max_length=255)
+    account_no = models.CharField(max_length=20)
+    IFSC_code = models.CharField(max_length=11)
+
+
 class ShopFeedback(models.Model):
     feedback_user = models.ForeignKey(User, on_delete=models.CASCADE)
     feedback_shop = models.ForeignKey(ShopRegistration, on_delete=models.CASCADE)

@@ -12,6 +12,6 @@ class ShopFeedbackAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(ShopOwnerDetails)
+@admin.register(ShopOwnerProfile)
 class ShopOwnerAdmin(admin.ModelAdmin):
     pass
