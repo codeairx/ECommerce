@@ -1,28 +1,34 @@
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth import login
 from django.http import HttpResponse
-from django.shortcuts import render
-from .forms import ShopRegistrationForm, ShopOwnerDetailsForm, ShopOwnerProfileForm
+from django.shortcuts import render, redirect
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
+from .models import ShopOwnerRegistration
+from .forms import ShopRegisterForm, ShopOwnerRegisterForm, ShopOwnerBankForm
 
 
-@login_required
+def shop_owner_registration(request):
+    if request.method == 'POST':
+        form = ShopOwnerRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.password = make_password(form.cleaned_data['password'])
+            user.save()
+            # error
+            login(request, request.user)
+            return redirect('shop_registration')
+        else:
+            return HttpResponse('custom error')
+    else:
+        form1 = ShopOwnerRegisterForm()
+        return render(request, 'shop/user_register.html', {'form1': form1})
+
+
 def shop_registration(request):
     if request.method == 'POST':
-        form = ShopRegistrationForm(request.POST)
+        form = ShopRegisterForm(request.POST)
         if form.is_valid():
-            owner = form.save(commit=False)
-            owner.shop_owner = User.objects.get(id=request.user.id)
-            owner.save()
-            return HttpResponse('ok')
+            pass
     else:
-        form3 = ShopRegistrationForm()
-        form1 = ShopOwnerDetailsForm(instance=request.user)
-        form2 = ShopOwnerProfileForm()
-
-        args = {
-            'form1': form1,
-            'form2': form2,
-            'form3': form3
-        }
-
-        return render(request, 'shop/shopregister.html', args)
+        form = ShopRegisterForm(instance=ShopOwnerRegistration.objects.get(id=request.user.id))
+        return render(request, 'shop/shopregister.html', {'form': form})

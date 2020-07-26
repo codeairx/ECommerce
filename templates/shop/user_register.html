@@ -7,10 +7,10 @@
 
 {% block content %}
     <div class="container">
-        <h1 style="font-family: Roboto;">Enter Your Shop Details</h1>
-        <form id="shopform" method="POST" action="{% url 'shop_registration' %}">
+        <h1 style="font-family: Roboto;">Start's Your Business Online Today</h1>
+        <form id="shopform" method="POST" action="{% url 'shop_owner_registration' %}">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form1.as_p }}
             <button class="btn btn-success" type="submit">Register</button>
         </form>
     </div>

@@ -2,44 +2,48 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-class ShopOwnerProfile(models.Model):
-    owner = models.OneToOneField(User, on_delete=models.CASCADE)
-    shop_owner_contact_no = models.CharField(max_length=11)
-    shop_owner_contact_address = models.TextField()
-    shop_owner_PAN_no = models.CharField(max_length=10)
+class ShopOwnerRegistration(models.Model):
+    name = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=10, unique=True)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=128)
+    contact_address = models.TextField()
+    TIN_number = models.CharField(max_length=11)
 
     def __str__(self):
-        return str(self.owner)
+        return self.name
 
 
 class ShopRegistration(models.Model):
-    PRODUCTS = [
+    SHOP_TYPES = [
         ('Electronic', 'Electronic'),
-        ('Book', 'Book'),
+        ('Book', 'Book Depot'),
         ('Clothes', 'Clothes'),
         ('Grocery', 'Grocery'),
     ]
 
-    shop_owner = models.OneToOneField(User, on_delete=models.CASCADE)
-    shop_type = models.CharField(max_length=255, choices=PRODUCTS)
-    shop_name = models.CharField(max_length=255)
+    owner = models.OneToOneField(ShopOwnerRegistration, on_delete=models.CASCADE)
+    shop_name = models.CharField(max_length=150)
+    shop_type = models.CharField(max_length=100, choices=SHOP_TYPES)
+    shop_email_address = models.EmailField(null=True, blank=True)
     shop_address = models.TextField()
-    shop_description = models.TextField()
-    shop_email_address = models.EmailField()
-    shop_verified = models.BooleanField(default=False)
+    shop_phone_number = models.CharField(max_length=13)
+    shop_description = models.TextField(null=True, blank=True)
+    shop_pincode = models.CharField(max_length=6)
     shop_state = models.CharField(max_length=200)
     shop_city = models.CharField(max_length=200)
-    shop_pincode = models.CharField(max_length=6)
+    shop_verified = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.shop_name
+        return str(self.shop_name)
 
 
 class ShopOwnerBankDetails(models.Model):
-    shop_owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    shop_owner = models.OneToOneField(ShopOwnerRegistration, on_delete=models.CASCADE)
     bank = models.CharField(max_length=255)
     account_no = models.CharField(max_length=20)
     IFSC_code = models.CharField(max_length=11)
+    PAN_number = models.CharField(max_length=11)
 
 
 class ShopFeedback(models.Model):
