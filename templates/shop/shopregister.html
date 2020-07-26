@@ -10,22 +10,26 @@
         <h1 style="font-family: Roboto;">Start's Your Business Online Today</h1>
         <form id="shopform" method="POST" action="{% url 'shop_registration' %}">
             {% csrf_token %}
-            <h2 class="mt-4">Owner Details</h2>
-            {% for field in form1 %}
-                {{ field.label_tag }}
-                {{ field|add_class:'form-control' }}
-            {% endfor %}
-            {% for field in form2 %}
-                {{ field.label_tag }}
-                {{ field|add_class:'form-control' }}
-            {% endfor %}
-            <h2 class="mt-5">Shop Details</h2>
-            {% for field in form3 %}
-                {{ field.label_tag }}
-                {{ field|add_class:'form-control' }}
-            {% endfor %}
-            <button class="btn btn-primary mt-2" type="submit">Next</button>
-            <button id="savebtn" class="btn btn-warning mt-2" type="button">Save</button>
+            <div id="form1">
+                <h2 class="mt-4">Owner Details</h2>
+                {% for field in form1 %}
+                    {{ field.label_tag }}
+                    {{ field|add_class:'form-control' }}
+                {% endfor %}
+                {% for field in form2 %}
+                    {{ field.label_tag }}
+                    {{ field|add_class:'form-control' }}
+                {% endfor %}
+            </div>
+            <div id="form2">
+                <h2 class="mt-5">Shop Details</h2>
+                {% for field in form3 %}
+                    {{ field.label_tag }}
+                    {{ field|add_class:'form-control' }}
+                {% endfor %}
+            </div>
+            <button id="save-btn" class="btn btn-warning mt-2" type="button">Save</button>
+            <button id="apply-btn" class="btn btn-success mt-2" type="submit">Apply</button>
         </form>
     </div>
 {% endblock content %}

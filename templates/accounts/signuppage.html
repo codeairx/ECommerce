@@ -12,10 +12,6 @@
             <h3>Create New Account</h3>
             <form method="POST" action="{% url 'signuppage' %}">
                 {% csrf_token %}
-                <label>First Name: </label>
-                {{ form.firstname|add_class:'form-control' }}
-                <label>Last Name: </label>
-                {{ form.lastname|add_class:'form-control' }}
                 <label>Email: </label>
                 {{ form.email|add_class:'form-control' }}
                 <span class="d-none" id="emailcheck"></span>

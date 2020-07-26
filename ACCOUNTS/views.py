@@ -32,8 +32,6 @@ def signup_user(request):
             if not User.objects.filter(email=userform.cleaned_data['email']).exists():
                 user = User.objects.create_user(
                     username=userform.cleaned_data['email'],
-                    first_name=userform.cleaned_data['firstname'],
-                    last_name=userform.cleaned_data['lastname'],
                     email=userform.cleaned_data['email'],
                     password=userform.cleaned_data['password2']
                 )

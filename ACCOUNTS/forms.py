@@ -7,8 +7,6 @@ class UserLoginForm(forms.Form):
 
 
 class UserCreateForm(forms.Form):
-    firstname = forms.CharField()
-    lastname = forms.CharField()
     email = forms.EmailField()
     password1 = forms.CharField(widget=forms.PasswordInput())
     password2 = forms.CharField(widget=forms.PasswordInput())
