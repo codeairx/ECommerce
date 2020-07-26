@@ -2,6 +2,7 @@
   <dictionary name="Nikesh">
     <words>
       <w>allauth</w>
+      <w>bankdetailadd</w>
       <w>checkemail</w>
       <w>emailcheck</w>
       <w>firstname</w>
@@ -12,6 +13,7 @@
       <w>nikesh</w>
       <w>pincode</w>
       <w>savebtn</w>
+      <w>sellerhome</w>
       <w>sellerlogin</w>
       <w>shopform</w>
       <w>shopregister</w>

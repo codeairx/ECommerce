@@ -2,14 +2,12 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-class ShopOwnerRegistration(models.Model):
+class ShopOwnerProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=10, unique=True)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=128)
     contact_address = models.TextField()
     TIN_number = models.CharField(max_length=11)
-    last_login = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -23,7 +21,7 @@ class ShopRegistration(models.Model):
         ('Grocery', 'Grocery'),
     ]
 
-    owner = models.OneToOneField(ShopOwnerRegistration, on_delete=models.CASCADE)
+    owner = models.OneToOneField(User, on_delete=models.CASCADE)
     shop_name = models.CharField(max_length=150)
     shop_type = models.CharField(max_length=100, choices=SHOP_TYPES)
     shop_email_address = models.EmailField(null=True, blank=True)
@@ -40,7 +38,7 @@ class ShopRegistration(models.Model):
 
 
 class ShopOwnerBankDetails(models.Model):
-    shop_owner = models.OneToOneField(ShopOwnerRegistration, on_delete=models.CASCADE)
+    shop_owner = models.OneToOneField(User, on_delete=models.CASCADE)
     bank = models.CharField(max_length=255)
     account_no = models.CharField(max_length=20)
     IFSC_code = models.CharField(max_length=11)
