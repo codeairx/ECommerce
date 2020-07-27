@@ -1,8 +1,10 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login, authenticate
 from .forms import UserCreateForm, UserLoginForm
+
+User = get_user_model()
 
 
 def login_user(request):
@@ -31,7 +33,6 @@ def signup_user(request):
         if userform.is_valid():
             if not User.objects.filter(email=userform.cleaned_data['email']).exists():
                 user = User.objects.create_user(
-                    username=userform.cleaned_data['email'],
                     email=userform.cleaned_data['email'],
                     password=userform.cleaned_data['password2']
                 )

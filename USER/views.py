@@ -2,6 +2,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import ProfileForm
 from .models import UserProfile
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 def user_profile(request):

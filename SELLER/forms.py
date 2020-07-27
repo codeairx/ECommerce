@@ -23,8 +23,3 @@ class ShopOwnerBankForm(forms.ModelForm):
         model = ShopOwnerBankDetails
         fields = '__all__'
         exclude = ['shop_owner']
-
-
-class SellerLoginForm(forms.Form):
-    email = forms.EmailField()
-    password = forms.CharField()

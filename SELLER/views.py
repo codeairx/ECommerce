@@ -1,15 +1,15 @@
-from django.contrib.auth import login
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth.models import User
+from django.contrib.admin.views.decorators import user_passes_test
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import ShopOwnerProfile
-from .forms import ShopRegisterForm, ShopOwnerProfileForm, ShopOwnerBankForm, SellerLoginForm
+from .forms import ShopRegisterForm, ShopOwnerProfileForm, ShopOwnerBankForm
+
+User = get_user_model()
 
 
 @login_required
-@staff_member_required(login_url='/seller/user-register/')
+@user_passes_test(lambda u: u.is_seller, login_url='/seller/user-register/')
 def seller_home(request):
     return render(request, 'shop/sellerhome.html')
 
@@ -22,7 +22,7 @@ def shop_owner_registration(request):
             user = form.save(commit=False)
             user.user = request.user
             user_obj = User.objects.get(id=request.user.id)
-            user_obj.is_staff = True
+            user_obj.is_seller = True
             user_obj.save()
             user.save()
             return redirect('shop_registration')
