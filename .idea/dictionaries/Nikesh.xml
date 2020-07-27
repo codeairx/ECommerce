@@ -10,15 +10,19 @@
       <w>lconf</w>
       <w>loginbox</w>
       <w>loginpage</w>
+      <w>msapplication</w>
+      <w>navbar</w>
       <w>nikesh</w>
       <w>pincode</w>
       <w>savebtn</w>
+      <w>searchbar</w>
       <w>sellerhome</w>
       <w>sellerlogin</w>
       <w>shopform</w>
       <w>shopregister</w>
       <w>signuppage</w>
       <w>socialaccount</w>
+      <w>toggler</w>
       <w>userform</w>
       <w>usernames</w>
     </words>
