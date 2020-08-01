@@ -20,8 +20,3 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(MobileSpecification)
 class MobileSpecsAdmin(admin.ModelAdmin):
     pass
-
-
-@admin.register(Mobilevariant)
-class MobileVariantAdmin(admin.ModelAdmin):
-    pass

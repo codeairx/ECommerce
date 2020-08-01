@@ -5,69 +5,32 @@
 {% endblock title %}
 
 {% block navbar %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <a class="navbar-brand pr-3 pl-3" href="{% url 'seller_home' %}">OnlineStore Seller</a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav navbar-link">
-                {% if user.is_authenticated %}
-                    <li class="nav-item active px-3">
-                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item active px-3">
-                        <a class="nav-link px-3" href="{% url 'loginpage' %}">Login</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active px-3">
-                    <a class="nav-link active px-3" href="#">Listing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active px-3" href="#">Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active px-3" href="#">Returns</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active px-3" href="#">Payments</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    {% include 'base/seller_nav.html' %}
 {% endblock navbar %}
 
 {% block content %}
     <div class="container mt-2 mb-2">
-        <form>
-            <h3 class="alert alert-info">Owner Details</h3>
-            {% for field in form1 %}
-                {{ field.label_tag }}
-                {{ field|add_class:'form-control' }}
-            {% endfor %}
-            <br>
-            <h3 class="alert alert-info">Shop Details</h3>
-            {% for field in form2 %}
-                {{ field.label_tag }}
-                {{ field|add_class:'form-control' }}
-            {% endfor %}
-            <br>
-            <h3 class="alert alert-info">Bank Details</h3>
-            {% for field in form3 %}
-                {{ field.label_tag }}
-                {{ field|add_class:'form-control' }}
-            {% endfor %}
-        </form>
+        <div class="row">
+            <div class="col-6">
+                <h3 class="alert alert-info">Owner Details</h3>
+                {% for field in form1 %}
+                    {{ field.label_tag }}
+                    {{ field | add_class:'form-control' | attr:'readonly:True' }}
+                {% endfor %}
+                <br>
+                <h3 class="alert alert-info">Bank Account Details</h3>
+                {% for field in form3 %}
+                    {{ field.label_tag }}
+                    {{ field | add_class:'form-control'|attr:'readonly:True' }}
+                {% endfor %}
+            </div>
+            <div class="col-6">
+                <h3 class="alert alert-info">Shop Details</h3>
+                {% for field in form2 %}
+                    {{ field.label_tag }}
+                    {{ field | add_class:'form-control' | attr:'readonly:True' }}
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock content %}

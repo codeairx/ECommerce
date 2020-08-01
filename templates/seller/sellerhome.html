@@ -6,50 +6,7 @@
 {% endblock title %}
 
 {% block navbar %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <a class="navbar-brand pr-3 pl-3" href="#">OnlineStore Seller</a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav navbar-link">
-                {% if user.is_authenticated %}
-                    <li class="nav-item active">
-                        <a class="nav-link px-3" href="{% url 'seller_profile' %}">Welcome {{ user }}</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item active px-3">
-                        <a class="nav-link px-3" href="{% url 'loginpage' %}">Login</a>
-                    </li>
-                {% endif %}
-                <li class="nav-item active px-3">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active px-3">
-                    <a class="nav-link active px-3" href="#">Listing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active px-3" href="#">Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active px-3" href="#">Returns</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active px-3" href="#">Payments</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    {% include 'base/seller_nav.html' %}
 {% endblock navbar %}
 
 {% block content %}

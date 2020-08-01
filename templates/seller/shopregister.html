@@ -10,7 +10,10 @@
         <h1 style="font-family: Roboto;">Enter Your Shop Details</h1>
         <form id="shopform" method="POST" action="{% url 'shop_registration' %}">
             {% csrf_token %}
-            {{ form.as_p }}
+            {% for field in form %}
+                {{ field.label_tag }}
+                {{ field | add_class:'form-control' }}
+            {% endfor %}
             <button class="btn btn-success" type="submit">Next</button>
         </form>
     </div>

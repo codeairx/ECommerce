@@ -10,29 +10,6 @@
         <div class="container">
             <h1>Welcome to E-Commerce Website.</h1>
             {{ user }}
-
-            <div class="mt-5">
-                <ul>
-                    <li>
-                        <a href="{% url 'loginpage' %}">user login</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'signuppage' %}">user signup</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'shop_owner_registration' %}">seller signup</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'user_profile' %}">Profile</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'seller_home' %}">seller login</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'logout' %}">logout</a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </div>
 {% endblock content %}
