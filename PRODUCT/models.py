@@ -230,14 +230,10 @@ class Laptop(models.Model):
     brand = models.CharField(max_length=200)
     model_name = models.TextField()
     description = models.TextField()
-
-
-class LaptopVariant(models.Model):
-    laptop = models.ForeignKey(Laptop, on_delete=models.CASCADE)
     processor = models.CharField(max_length=255)
     RAM = models.IntegerField()
     storage = models.CharField(max_length=100)
-    price_by_variant = models.BigIntegerField()
+    price = models.BigIntegerField()
 
 
 # LAPTOP SECTION END

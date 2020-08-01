@@ -7,3 +7,10 @@ class MobileSpecificationForm(forms.ModelForm):
         model = MobileSpecification
         fields = '__all__'
         exclude = ['product']
+
+
+class LaptopSpecificationForm(forms.ModelForm):
+    class Meta:
+        model = Laptop
+        fields = '__all__'
+        exclude = ['product']
