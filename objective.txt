@@ -1,4 +1,6 @@
 Project Completion Objectives -
 
-1. Login, Signup and Logout of normal user - done
-2. seller login, signup and logout - incomplete
+1. Login, Signup and Logout of normal user - completed
+2. seller login, signup and logout - completed
+3. Add Products - completed
+4. Update Product info - incomplete

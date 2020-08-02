@@ -10,7 +10,9 @@
       <w>emailcheck</w>
       <w>firstname</w>
       <w>forloop</w>
+      <w>gmail</w>
       <w>gorila</w>
+      <w>kgzwcncseclqpfet</w>
       <w>lastname</w>
       <w>lconf</w>
       <w>loginbox</w>
@@ -32,9 +34,11 @@
       <w>shopform</w>
       <w>shopregister</w>
       <w>signuppage</w>
+      <w>smtp</w>
       <w>socialaccount</w>
       <w>subcat</w>
       <w>toggler</w>
+      <w>uidb</w>
       <w>userform</w>
       <w>usernames</w>
     </words>
