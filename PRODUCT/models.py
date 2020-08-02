@@ -153,9 +153,6 @@ class MobileSpecification(models.Model):
     # Brand Details
     brand = models.CharField(max_length=200)
     phone_name = models.CharField(max_length=200)
-    model_name = models.CharField(max_length=200, null=True)
-    launch_date = models.DateField(null=True)
-
     # Body dimension
     # dimensions = models.CharField(max_length=200, null=True)
     # weight = models.FloatField(null=True)

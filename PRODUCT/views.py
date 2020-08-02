@@ -55,7 +55,7 @@ def update_product_info(request, pk):
     # POST METHODS
     if request.method == 'POST':
 
-        if product.product_sub_category.subcategory_name == 'Mobiles':
+        if product.product_sub_category.subcategory_name == 'Mobile':
             try:
                 postForm = MobileSpecificationForm(request.POST,
                                                    instance=MobileSpecification.objects.get(product_id=pk))
@@ -66,11 +66,11 @@ def update_product_info(request, pk):
                 obj = postForm.save(commit=False)
                 obj.product = product
                 obj.save()
-                return redirect('product_info_update', pk)
+                return redirect('productlist')
             else:
                 return HttpResponse('err')
 
-        elif product.product_sub_category.subcategory_name == 'Laptops':
+        elif product.product_sub_category.subcategory_name == 'Laptop':
             try:
                 postForm = LaptopSpecificationForm(request.POST, instance=Laptop.objects.get(product_id=pk))
             except Laptop.DoesNotExist:
@@ -80,14 +80,28 @@ def update_product_info(request, pk):
                 obj = postForm.save(commit=False)
                 obj.product = product
                 obj.save()
-                return redirect('product_info_update', pk)
+                return redirect('productlist')
+            else:
+                return HttpResponse('err')
+
+        elif product.product_sub_category.subcategory_name == 'Book':
+            try:
+                postForm = BooksForm(request.POST, instance=Book.objects.get(product_id=pk))
+            except Book.DoesNotExist:
+                postForm = BooksForm(request.POST)
+
+            if postForm.is_valid():
+                obj = postForm.save(commit=False)
+                obj.product = product
+                obj.save()
+                return redirect('productlist')
             else:
                 return HttpResponse('err')
 
     # GET METHODS
     else:
 
-        if product.product_sub_category.subcategory_name == 'Mobiles':
+        if product.product_sub_category.subcategory_name == 'Mobile':
             try:
                 getForm = MobileSpecificationForm(instance=MobileSpecification.objects.get(product_id=pk))
             except MobileSpecification.DoesNotExist:
@@ -99,11 +113,23 @@ def update_product_info(request, pk):
             }
             return render(request, 'product/product_info_update.html', context)
 
-        if product.product_sub_category.subcategory_name == 'Laptops':
+        if product.product_sub_category.subcategory_name == 'Laptop':
             try:
                 getForm = LaptopSpecificationForm(instance=Laptop.objects.get(product_id=pk))
             except Laptop.DoesNotExist:
                 getForm = LaptopSpecificationForm()
+
+            context = {
+                'form': getForm,
+                'id': pk,
+            }
+            return render(request, 'product/product_info_update.html', context)
+
+        if product.product_sub_category.subcategory_name == 'Book':
+            try:
+                getForm = BooksForm(instance=Book.objects.get(product_id=pk))
+            except Book.DoesNotExist:
+                getForm = BooksForm()
 
             context = {
                 'form': getForm,
