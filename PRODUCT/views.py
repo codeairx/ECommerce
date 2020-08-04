@@ -98,6 +98,20 @@ def update_product_info(request, pk):
             else:
                 return HttpResponse('err')
 
+
+        elif product.product_sub_category.subcategory_name == 'Novel':
+            try:
+                postForm = NovelForm(request.POST, instance=Novel.objects.get(product_id=pk))
+            except Novel.DoesNotExist:
+                postForm = NovelForm(request.POST)
+
+            if postForm.is_valid():
+                obj = postForm.save(commit=False)
+                obj.product = product
+                obj.save()
+                return redirect('productlist')
+            else:
+                return HttpResponse('err')
     # GET METHODS
     else:
 
@@ -113,7 +127,7 @@ def update_product_info(request, pk):
             }
             return render(request, 'product/product_info_update.html', context)
 
-        if product.product_sub_category.subcategory_name == 'Laptop':
+        elif product.product_sub_category.subcategory_name == 'Laptop':
             try:
                 getForm = LaptopSpecificationForm(instance=Laptop.objects.get(product_id=pk))
             except Laptop.DoesNotExist:
@@ -125,11 +139,23 @@ def update_product_info(request, pk):
             }
             return render(request, 'product/product_info_update.html', context)
 
-        if product.product_sub_category.subcategory_name == 'Book':
+        elif product.product_sub_category.subcategory_name == 'Book':
             try:
                 getForm = BooksForm(instance=Book.objects.get(product_id=pk))
             except Book.DoesNotExist:
                 getForm = BooksForm()
+
+            context = {
+                'form': getForm,
+                'id': pk,
+            }
+            return render(request, 'product/product_info_update.html', context)
+
+        elif product.product_sub_category.subcategory_name == 'Novel':
+            try:
+                getForm = NovelForm(instance=Novel.objects.get(product_id=pk))
+            except Novel.DoesNotExist:
+                getForm = NovelForm()
 
             context = {
                 'form': getForm,

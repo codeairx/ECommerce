@@ -21,3 +21,10 @@ class BooksForm(forms.ModelForm):
         model = Book
         fields = '__all__'
         exclude = ['product']
+
+
+class NovelForm(forms.ModelForm):
+    class Meta:
+        model = Novel
+        fields = '__all__'
+        exclude = ['product']
