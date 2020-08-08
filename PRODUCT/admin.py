@@ -2,12 +2,7 @@ from django.contrib import admin
 from .models import *
 
 
-@admin.register(MasterCategory)
-class MasterCategoryAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(SubCategory)
+@admin.register(Category)
 class SubCategoryAdmin(admin.ModelAdmin):
     pass
 

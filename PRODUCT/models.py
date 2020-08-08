@@ -2,30 +2,21 @@ from django.db import models
 from SELLER.models import ShopRegistration
 
 
-class MasterCategory(models.Model):
-    category_name = models.CharField(max_length=255)
+class Category(models.Model):
+    category_name = models.CharField(max_length=200)
 
     def __str__(self):
         return self.category_name
 
 
-class SubCategory(models.Model):
-    parent_category = models.ForeignKey(MasterCategory, on_delete=models.CASCADE)
-    subcategory_name = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.subcategory_name
-
-
 class Product(models.Model):
     product_shop = models.ForeignKey(ShopRegistration, on_delete=models.CASCADE)
-    product_master_category = models.ForeignKey(MasterCategory, on_delete=models.CASCADE)
-    product_sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    product_category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    product_type = models.CharField(max_length=100)
     product_name = models.CharField(max_length=255)
     product_stoke = models.IntegerField()
     product_MRP = models.IntegerField()
     product_selling_price = models.IntegerField()
-    seller = models.ManyToManyField(ShopRegistration, related_name='seller_product_table')
 
     def __str__(self):
         return str(self.product_name)
@@ -149,77 +140,15 @@ class MobileSpecification(models.Model):
     ]
 
     phone_type = models.CharField(max_length=100, choices=PHONE_TYPE)
-    # ome_page_photo = models.ImageField(upload_to='phone_home_photos/')
-    # Brand Details
     brand = models.CharField(max_length=200)
     phone_name = models.CharField(max_length=200)
-    # Body dimension
-    # dimensions = models.CharField(max_length=200, null=True)
-    # weight = models.FloatField(null=True)
-    # build = models.CharField(choices=BUILD_TYPES, max_length=100)
-    # # display
-    # display_type = models.CharField(choices=DISPLAY_TYPES, max_length=100)
-    # display_size = models.CharField(max_length=200)
-    # display_refresh_rate = models.CharField(choices=REFRESH_RATE, max_length=100)
-    # display_resolution = models.CharField(max_length=200)
-    # display_protection = models.CharField(choices=PROTECTION_TYPE, max_length=150)
-    # HDR_support = models.BooleanField(default=True)
-    # # Platform
-    # UI_name = models.CharField(max_length=200)
-    # android_version = models.CharField(choices=ANDROID_VERSION, max_length=150)
-    # ios_version = models.CharField(max_length=100, choices=IOS_VERSION)
-    # processor = models.CharField(max_length=200)
-    # gpu = models.CharField(max_length=200, null=True)
-    # # Network
-    # network_technology = models.CharField(max_length=200, null=True)
-    # SIM_Type = models.CharField(choices=SIM_TYPE, max_length=150)
-    # wifi_technology = models.CharField(max_length=200, null=True)
-    # bluetooth = models.CharField(choices=BLUETOOTH_TECH, max_length=100)
-    # GPS = models.CharField(max_length=200, null=True)
-    # radio = models.BooleanField(default=True)
-    # NFC = models.BooleanField(default=False)
-    # # Memory
-    # RAM_Type = models.CharField(choices=RAM_TYPES, max_length=50)
-    # expandable_storage = models.BooleanField()
-    # storage_type = models.CharField(choices=STORAGE_TYPE, max_length=100)
-    # RAM = models.IntegerField()
-    # internal_storage = models.IntegerField()
-    # # Back Camera
-    # back_camera_setup = models.CharField(max_length=190)
-    # back_camera_resolution = models.TextField(blank=True)
-    # back_camera_features = models.TextField(blank=True)
-    # back_camera_video_features = models.TextField(blank=True)
-    # back_camera_flash = models.BooleanField()
-    # # Front Camera
-    # front_camera_setup = models.CharField(max_length=190)
-    # front_camera_resolution = models.TextField(blank=True)
-    # front_camera_features = models.TextField(blank=True)
-    # front_camera_flash = models.BooleanField()
-    # front_camera_video_features = models.TextField(blank=True)
-    # # Sound
-    # loudspeaker = models.CharField(max_length=100, choices=SPEAKER)
-    # audio_jack = models.CharField(max_length=100, choices=AUDIO_JACK)
-    # audio_features = models.CharField(max_length=200, blank=True)
-    # # Battery
-    # battery_capacity = models.CharField(max_length=200)
-    # battery_type = models.CharField(choices=BATTERY_TYPE, max_length=100)
-    # fast_charging = models.BooleanField(default=True)
-    # charging_output = models.CharField(max_length=200, blank=True)
-    # charging_port = models.CharField(max_length=100, choices=CHARGING_PORT)
-    # reverse_charging = models.BooleanField(default=True)
-    # wireless_charging = models.BooleanField()
-    # # Others
-    # fingerprint_sensor = models.CharField(choices=FINGERPRINT, max_length=200)
-    # face_unlock = models.BooleanField(default=True)
-    # other_sensors = models.TextField(blank=True)
-    # description = models.TextField(blank=True)
-    # rating = models.FloatField(blank=True)
 
     def __str__(self):
         return self.phone_name
 
 
 # MOBILE SECTION END
+
 
 # LAPTOP SECTION START
 class Laptop(models.Model):
@@ -232,26 +161,4 @@ class Laptop(models.Model):
     storage = models.CharField(max_length=100)
     price = models.BigIntegerField()
 
-
 # LAPTOP SECTION END
-
-
-# BOOK SECTION START
-class Book(models.Model):
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
-    book_title = models.CharField(max_length=200)
-    author = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.book_title
-
-
-class Novel(models.Model):
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
-    novel_title = models.CharField(max_length=255)
-    novel_author = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.novel_title
-
-# BOOK SECTION END

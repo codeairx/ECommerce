@@ -15,17 +15,21 @@
 
         <form class="mt-3" method="POST" action="{% url 'add_product' %}">
             {% csrf_token %}
-            <label for="id_product_master_category">Product master category:</label>
-            <select name="product_master_category" class="form-control" required="" id="id_product_master_category">
+            <label for="id_product_category">Product category:</label>
+            <select name="product_category" class="form-control" required="" id="id_product_category">
                 <option value="" selected="">---------</option>
-                {% for category in mc %}
+                {% for category in category %}
                     <option value="{{ category.id }}" selected="">{{ category }}</option>
                 {% endfor %}
             </select>
 
-            <label for="id_product_sub_category">Product sub category:</label>
-            <select name="product_sub_category" class="form-control" required="" id="id_product_sub_category">
-                <option value="" selected="">---------</option>
+            <label for="id_product_type">Product Type:</label>
+            <select type="text" name="product_type" class="form-control" required="" id="id_product_type">
+                <option value="phone" selected="">Phone</option>
+                <option value="laptop" selected="">Laptop</option>
+                <option value="Earphone" selected="">Earphone</option>
+                <option value="phone charger" selected="">Phone Charger</option>
+                <option value="laptop charger" selected="">Laptop Charger</option>
             </select>
 
             <label for="id_product_name">Product Name:</label>

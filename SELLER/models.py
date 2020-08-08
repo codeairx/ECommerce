@@ -9,23 +9,14 @@ class ShopOwnerProfile(models.Model):
     name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=10, unique=True)
     contact_address = models.TextField()
-    TIN_number = models.CharField(max_length=11)
 
     def __str__(self):
         return self.name
 
 
 class ShopRegistration(models.Model):
-    SHOP_TYPES = [
-        ('Electronic', 'Electronic'),
-        ('Book', 'Book Depot'),
-        ('Clothes', 'Clothes'),
-        ('Grocery', 'Grocery'),
-    ]
-
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     shop_name = models.CharField(max_length=150)
-    shop_type = models.CharField(max_length=100, choices=SHOP_TYPES)
     shop_email_address = models.EmailField(null=True, blank=True)
     shop_address = models.TextField()
     shop_phone_number = models.CharField(max_length=13)

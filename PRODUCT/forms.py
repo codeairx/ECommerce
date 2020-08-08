@@ -14,17 +14,3 @@ class LaptopSpecificationForm(forms.ModelForm):
         model = Laptop
         fields = '__all__'
         exclude = ['product']
-
-
-class BooksForm(forms.ModelForm):
-    class Meta:
-        model = Book
-        fields = '__all__'
-        exclude = ['product']
-
-
-class NovelForm(forms.ModelForm):
-    class Meta:
-        model = Novel
-        fields = '__all__'
-        exclude = ['product']
