@@ -1,5 +1,11 @@
+{% load static %}
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <a class="navbar-brand pr-3 pl-3" href="{% url 'seller_home' %}">OnlineStore Seller</a>
+    <a class="navbar-brand pr-3 pl-3" href="{% url 'seller_home' %}">
+        <img src="{% static 'img/logo/logo.jpg' %}" width="50" height="40"
+             class="d-inline-block align-top" alt="" loading="lazy">
+        OnlineStore Seller
+    </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
