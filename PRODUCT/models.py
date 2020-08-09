@@ -161,4 +161,36 @@ class Laptop(models.Model):
     storage = models.CharField(max_length=100)
     price = models.BigIntegerField()
 
+    def __str__(self):
+        return self.model_name
+
+
 # LAPTOP SECTION END
+
+class PhoneCharger(models.Model):
+    CHARGER_TYPES = [
+        ('Type C', 'Type C'),
+        ('Micro USB', 'Micro USB'),
+        ('Lighting', 'Lighting'),
+    ]
+
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    charger_output = models.CharField(max_length=3)
+    charger_type = models.CharField(max_length=50, choices=CHARGER_TYPES)
+
+
+class LaptopCharger(models.Model):
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    charger_output = models.CharField(max_length=3)
+
+
+class Earphones(models.Model):
+    EARPHONE_TYPES = [
+        ('Wired', 'Wired'),
+        ('Bluetooth', 'Bluetooth'),
+        ('Truly Wireless', 'Truly Wireless'),
+    ]
+
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    color = models.CharField(max_length=20)
+    earphone_type = models.CharField(max_length=50, choices=EARPHONE_TYPES)

@@ -14,3 +14,24 @@ class LaptopSpecificationForm(forms.ModelForm):
         model = Laptop
         fields = '__all__'
         exclude = ['product']
+
+
+class LaptopChargerForm(forms.ModelForm):
+    class Meta:
+        model = LaptopCharger
+        fields = '__all__'
+        exclude = ['product']
+
+
+class EarphoneForm(forms.ModelForm):
+    class Meta:
+        model = Earphones
+        fields = '__all__'
+        exclude = ['product']
+
+
+class PhoneChargerForm(forms.ModelForm):
+    class Meta:
+        model = PhoneCharger
+        fields = '__all__'
+        exclude = ['product']
