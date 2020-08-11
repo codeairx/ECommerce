@@ -17,6 +17,7 @@ class Product(models.Model):
     product_stoke = models.IntegerField()
     product_MRP = models.IntegerField()
     product_selling_price = models.IntegerField()
+    is_product_live = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.product_name)

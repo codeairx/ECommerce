@@ -111,6 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Default login url
 LOGIN_URL = '/account/login/'
 LOGIN_REDIRECT_URL = '/'
+# SESSION_COOKIE_AGE = 60 * 10
 
 # EMAIL SMTP CONFIGURATION
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

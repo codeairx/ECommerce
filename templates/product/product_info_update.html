@@ -10,8 +10,9 @@
 {% endblock navbar %}
 
 {% block content %}
-    <div>
-        <form class="container mt-5" method="POST" action="{% url 'product_info_update' id %}">
+    <div class="container mt-4">
+        <h3>{{ product_name }}</h3>
+        <form class="container mt-4" method="POST" action="{% url 'product_info_update' id %}">
             {% csrf_token %}
             {% for field in form %}
                 {{ field.label_tag }}

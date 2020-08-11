@@ -33,6 +33,9 @@
                     <td>{{ product.product_stoke }}</td>
                     <td>
                         <a class="btn-sm btn-primary" href="{% url 'product_info_update' product.id %}">Update</a>
+                        <label class="pl-3" for="live_check{{ forloop.counter }}">Live</label>
+                        <input type="checkbox" name="live_checkbox" id="live_check{{ forloop.counter }}"
+                               value="{{ product.id }}" {% if product.is_product_live %}checked{% endif %}/>
                     </td>
                 </tr>
             {% endfor %}

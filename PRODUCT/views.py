@@ -1,8 +1,24 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
+
+
+def set_product_live(request):
+    if request.is_ajax():
+        pk = request.POST.get('pk')
+        checked = request.POST.get('checked')
+        if checked == 'true':
+            item = Product.objects.get(pk=pk)
+            item.is_product_live = True
+            item.save()
+            return JsonResponse({'success': True}, status=200)
+        else:
+            item = Product.objects.get(pk=pk)
+            item.is_product_live = False
+            item.save()
+            return JsonResponse({'success': True}, status=200)
 
 
 @login_required
@@ -122,9 +138,12 @@ def update_product_info(request, pk):
             except MobileSpecification.DoesNotExist:
                 getForm = MobileSpecificationForm()
 
+            product_name = Product.objects.get(pk=pk)
+
             context = {
                 'form': getForm,
                 'id': pk,
+                'product_name': product_name.product_name
             }
             return render(request, 'product/product_info_update.html', context)
 
@@ -136,9 +155,12 @@ def update_product_info(request, pk):
             except Laptop.DoesNotExist:
                 getForm = LaptopSpecificationForm()
 
+            product_name = Product.objects.get(pk=pk)
+
             context = {
                 'form': getForm,
                 'id': pk,
+                'product_name': product_name
             }
             return render(request, 'product/product_info_update.html', context)
 
@@ -150,9 +172,12 @@ def update_product_info(request, pk):
             except Earphones.DoesNotExist:
                 getForm = EarphoneForm()
 
+            product_name = Product.objects.get(pk=pk)
+
             context = {
                 'form': getForm,
                 'id': pk,
+                'product_name': product_name
             }
             return render(request, 'product/product_info_update.html', context)
 
@@ -164,8 +189,11 @@ def update_product_info(request, pk):
             except PhoneCharger.DoesNotExist:
                 getForm = PhoneChargerForm()
 
+            product_name = Product.objects.get(pk=pk)
+
             context = {
                 'form': getForm,
                 'id': pk,
+                'product_name': product_name
             }
             return render(request, 'product/product_info_update.html', context)
