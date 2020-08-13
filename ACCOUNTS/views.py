@@ -19,7 +19,12 @@ def login_user(request):
             )
             if user is not None:
                 login(request, user)
-                return redirect('homepage')
+                if user.is_superuser:
+                    return redirect('admin_homepage')
+                elif user.is_staff and not user.is_superuser:
+                    return redirect('staff_home')
+                else:
+                    return redirect('homepage')
             else:
                 return redirect('loginpage')
     else:

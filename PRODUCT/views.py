@@ -62,6 +62,34 @@ def product_list(request):
 
 @login_required
 @user_passes_test(lambda u: u.is_seller, login_url='/seller/user-register/')
+def product_stock_update(request, pk):
+    product = Product.objects.get(pk=pk)
+    shop = ShopRegistration.objects.get(owner_id=request.user.id)
+    print(shop.id)
+
+    if request.method == 'POST':
+        postForm = StokeUpdateForm(request.POST, instance=product)
+        if postForm.is_valid():
+            form = postForm.save(commit=False)
+            form.product_shop_id = shop.id
+            form.save()
+            return redirect('productlist')
+    else:
+        try:
+            getForm = StokeUpdateForm(instance=product)
+        except Product.DoesNotExist:
+            getForm = StokeUpdateForm()
+
+        context = {
+            'pk': pk,
+            'product': product,
+            'form': getForm
+        }
+        return render(request, 'product/update_stock_details.html', context)
+
+
+@login_required
+@user_passes_test(lambda u: u.is_seller, login_url='/seller/user-register/')
 def update_product_info(request, pk):
     product = Product.objects.get(pk=pk)
     # POST METHODS
