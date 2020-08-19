@@ -18,11 +18,10 @@
 
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/favicon_package/apple-touch-icon.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/favicon_package/apple-icon-180x180.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon_package/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon_package/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'img/favicon_package/site.webmanifest' %}">
-    <link rel="mask-icon" href="{% static 'img/favicon_package/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <link rel="manifest" href="{% static 'img/favicon_package/manifest.json' %}">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
@@ -34,10 +33,11 @@
 
 {% block navbar %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+
         <a class="navbar-brand pr-3 pl-3" href="{% url 'homepage' %}">
-            <img src="{% static 'img/logo/logo.jpg' %}" width="50" height="40"
-                 class="d-inline-block align-top" alt="" loading="lazy">
-            OnlineStore.com
+            <img src="{% static 'img/logo/logo_title.png' %}" width="45" height="45"
+                 class="d-inline-block align-top" alt="logo" loading="lazy">
+            <p style="vertical-align: middle; display: inline">OnlineStore.com</p>
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
