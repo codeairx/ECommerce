@@ -4,7 +4,6 @@ from .models import CarouselImage
 
 def homepage(request):
     images = CarouselImage.objects.all()
-    print(images)
     context = {
         'carousel_img': images,
     }

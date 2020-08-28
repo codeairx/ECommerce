@@ -7,9 +7,16 @@ body {
 }
 
 .searchbar {
-    max-width: 800px;
+    max-width: 600px;
 }
 
 .navbar-link {
     margin-left: auto;
+}
+
+@media (min-width: 320px) {
+    .carousel_size {
+        max-width: 100%;
+        height: 300px;
+    }
 }

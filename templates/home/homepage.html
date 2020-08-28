@@ -2,23 +2,41 @@
 {% load static %}
 
 {% block title %}
-    <title>Home</title>
+    <title>OnlineStore.com | Home</title>
 {% endblock title %}
 
 {% block content %}
-    <div>
+    <div class="d-none d-md-block">
+        <div class="bg-white">
+            <ul class="nav nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mobiles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Laptops</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mobile Accessories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mobile Covers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Laptop Accessories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">More</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
+    <div>
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
             <div class="carousel-inner">
                 {% for image in carousel_img %}
                     <div class="carousel-item {% if forloop.first %} active {% endif %}">
-                        <img class="d-block w-100" id="carousel" src="{{ image.image.url }}" height="500"
-                             alt="{{ image.description }}">
+                        <img class="img-fluid" src="{{ image.image.url }}" alt="{{ image.description }}">
                     </div>
                 {% endfor %}
             </div>
@@ -35,5 +53,9 @@
         <div class="container">
             {{ user }}
         </div>
+    </div>
+
+    <div id="footer">
+        {% include 'base/footer.html' %}
     </div>
 {% endblock content %}
