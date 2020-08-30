@@ -1,8 +1,16 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
+from django.core import serializers
 from .models import *
 from .forms import *
+
+
+def filter_product_type(request):
+    if request.is_ajax():
+        pk = request.GET.get('pk')
+        serializerData = serializers.serialize('json', ProductType.objects.filter(category_id=pk))
+        return JsonResponse(serializerData, safe=False)
 
 
 def set_product_live(request):
@@ -26,30 +34,24 @@ def set_product_live(request):
 def add_product(request):
     if request.method == 'POST':
 
-        category = request.POST.get('product_category')
-        product_type = request.POST.get('product_type')
-        stoke = request.POST.get('product_stoke')
-        name = request.POST.get('product_name')
-        MRP = request.POST.get('product_MPR')
-        price = request.POST.get('product_selling_price')
-
         obj = Product.objects.create(
             product_shop_id=request.user.shopregistration.id,
-            product_category_id=category,
-            product_type=product_type,
-            product_name=name,
-            product_stoke=stoke,
-            product_MRP=MRP,
-            product_selling_price=price
+            product_category=request.POST.get('product_category'),
+            product_type=request.POST.get('product_type'),
+            brand=request.POST.get('product_brand'),
+            product_home_img=request.FILES['product_image'],
+            product_name=request.POST.get('product_name'),
+            product_stoke=request.POST.get('product_stoke'),
+            product_MRP=request.POST.get('product_MPR'),
+            product_selling_price=request.POST.get('product_selling_price')
         )
         obj.save()
         return redirect('productlist')
     else:
-        category = Category.objects.all()
-        args = {
-            'category': category
+        context = {
+            'category': Category.objects.all()
         }
-        return render(request, 'product/addproduct.html', args)
+        return render(request, 'product/addproduct.html', context)
 
 
 @login_required
@@ -98,8 +100,8 @@ def update_product_info(request, pk):
         if product.product_category.category_name == 'Mobile':
             try:
                 postForm = MobileSpecificationForm(request.POST,
-                                                   instance=MobileSpecification.objects.get(product_id=pk))
-            except MobileSpecification.DoesNotExist:
+                                                   instance=MobileDetails.objects.get(product_id=pk))
+            except MobileDetails.DoesNotExist:
                 postForm = MobileSpecificationForm(request.POST)
 
             if postForm.is_valid():
@@ -113,8 +115,8 @@ def update_product_info(request, pk):
         # LAPTOP
         elif product.product_category.category_name == 'Laptop':
             try:
-                postForm = LaptopSpecificationForm(request.POST, instance=Laptop.objects.get(product_id=pk))
-            except Laptop.DoesNotExist:
+                postForm = LaptopSpecificationForm(request.POST, instance=LaptopDetails.objects.get(product_id=pk))
+            except LaptopDetails.DoesNotExist:
                 postForm = LaptopSpecificationForm(request.POST)
 
             if postForm.is_valid():
@@ -128,7 +130,7 @@ def update_product_info(request, pk):
         # EARPHONES
         elif product.product_type == 'earphone':
             try:
-                postForm = EarphoneForm(request.POST, instance=Laptop.objects.get(product_id=pk))
+                postForm = EarphoneForm(request.POST, instance=Earphones.objects.get(product_id=pk))
             except Earphones.DoesNotExist:
                 postForm = EarphoneForm(request.POST)
 
@@ -154,16 +156,15 @@ def update_product_info(request, pk):
                 return redirect('productlist')
             else:
                 return HttpResponse('err')
-
-
-
     # GET METHODS
+
     else:
+
         # MOBILE
         if product.product_category.category_name == 'Mobile':
             try:
-                getForm = MobileSpecificationForm(instance=MobileSpecification.objects.get(product_id=pk))
-            except MobileSpecification.DoesNotExist:
+                getForm = MobileSpecificationForm(instance=MobileDetails.objects.get(product_id=pk))
+            except MobileDetails.DoesNotExist:
                 getForm = MobileSpecificationForm()
 
             product_name = Product.objects.get(pk=pk)
@@ -175,12 +176,11 @@ def update_product_info(request, pk):
             }
             return render(request, 'product/product_info_update.html', context)
 
-
         # LAPTOP
         elif product.product_category.category_name == 'Laptop':
             try:
-                getForm = LaptopSpecificationForm(instance=Laptop.objects.get(product_id=pk))
-            except Laptop.DoesNotExist:
+                getForm = LaptopSpecificationForm(instance=LaptopDetails.objects.get(product_id=pk))
+            except LaptopDetails.DoesNotExist:
                 getForm = LaptopSpecificationForm()
 
             product_name = Product.objects.get(pk=pk)
@@ -191,7 +191,6 @@ def update_product_info(request, pk):
                 'product_name': product_name
             }
             return render(request, 'product/product_info_update.html', context)
-
 
         # EARPHONE
         elif product.product_type == 'earphone':
@@ -208,7 +207,6 @@ def update_product_info(request, pk):
                 'product_name': product_name
             }
             return render(request, 'product/product_info_update.html', context)
-
 
         # PHONE CHARGER
         elif product.product_type == 'phone charger':

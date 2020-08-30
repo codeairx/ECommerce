@@ -1,17 +1,12 @@
 from django.contrib import admin
-from .models import *
+from .models import Category, ProductType
 
 
 @admin.register(Category)
-class SubCategoryAdmin(admin.ModelAdmin):
+class Category(admin.ModelAdmin):
     pass
 
 
-@admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(MobileSpecification)
-class MobileSpecsAdmin(admin.ModelAdmin):
+@admin.register(ProductType)
+class Category(admin.ModelAdmin):
     pass

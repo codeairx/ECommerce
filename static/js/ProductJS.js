@@ -15,7 +15,7 @@ function getCookie(name) {
 
 const csrftoken = getCookie('csrftoken');
 
-
+// Live status
 $('input[name=live_checkbox]').change(
     function () {
         if (this.checked) {
@@ -37,3 +37,29 @@ $('input[name=live_checkbox]').change(
         }
     }
 );
+
+
+// Category Type Filter
+function addProductTypes(data) {
+    data = JSON.parse(data);
+    var select = document.getElementById('id_product_type');
+    select.innerHTML = '';
+    for (let i = 0; i < data.length; i++) {
+        var opt = document.createElement('option');
+        opt.value = `${data[i].fields.product_type}`;
+        opt.innerHTML = `${data[i].fields.product_type}`;
+        select.appendChild(opt);
+    }
+}
+
+$('#id_product_category').on('change', function () {
+    $.ajax({
+        url: '/product/category-filter/',
+        method: 'GET',
+        dataType: 'json',
+        data: {'pk': this.value},
+        success: function (data) {
+            addProductTypes(data);
+        },
+    })
+});

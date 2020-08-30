@@ -11,14 +11,21 @@ class StokeUpdateForm(forms.ModelForm):
 
 class MobileSpecificationForm(forms.ModelForm):
     class Meta:
-        model = MobileSpecification
+        model = MobileDetails
+        fields = '__all__'
+        exclude = ['product']
+
+
+class PhoneChargerForm(forms.ModelForm):
+    class Meta:
+        model = PhoneCharger
         fields = '__all__'
         exclude = ['product']
 
 
 class LaptopSpecificationForm(forms.ModelForm):
     class Meta:
-        model = Laptop
+        model = LaptopDetails
         fields = '__all__'
         exclude = ['product']
 
@@ -37,8 +44,43 @@ class EarphoneForm(forms.ModelForm):
         exclude = ['product']
 
 
-class PhoneChargerForm(forms.ModelForm):
+class PendriveForm(forms.ModelForm):
     class Meta:
-        model = PhoneCharger
+        model = Pendrive
+        fields = '__all__'
+        exclude = ['product']
+
+
+class MemoryCardForm(forms.ModelForm):
+    class Meta:
+        model = MemoryCard
+        fields = '__all__'
+        exclude = ['product']
+
+
+class SpeakerForm(forms.ModelForm):
+    class Meta:
+        model = Speaker
+        fields = '__all__'
+        exclude = ['product']
+
+
+class PowerBankForm(forms.ModelForm):
+    class Meta:
+        model = PowerBank
+        fields = '__all__'
+        exclude = ['product']
+
+
+class MouseForm(forms.ModelForm):
+    class Meta:
+        model = Mouse
+        fields = '__all__'
+        exclude = ['product']
+
+
+class KeyboardForm(forms.ModelForm):
+    class Meta:
+        model = Keyboard
         fields = '__all__'
         exclude = ['product']

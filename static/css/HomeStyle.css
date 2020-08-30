@@ -10,13 +10,50 @@ body {
     max-width: 600px;
 }
 
+.dropdown-toggle::after {
+    content: none !important;
+}
+
+.anchor-class {
+    text-decoration: none !important;
+}
+
+.box-hover:hover {
+    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+.home-card-img {
+    position: relative;
+    height: 150px;
+    width: content-box;
+    padding: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.text-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .navbar-link {
     margin-left: auto;
 }
 
-@media (min-width: 320px) {
-    .carousel_size {
-        max-width: 100%;
-        height: 300px;
+.nav-hover a:hover {
+    border-radius: 12px;
+    background-color: orangered;
+    text-decoration-color: black;
+}
+
+@media (max-width: 480px) {
+    .home-card-img {
+        position: relative;
+        height: 90px;
+        width: content-box;
+        padding: 10px;
+        margin: 0 auto;
     }
 }
+

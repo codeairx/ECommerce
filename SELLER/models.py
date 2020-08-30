@@ -13,6 +13,9 @@ class ShopOwnerProfile(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        db_table = 'tbl_shop_owner_profile'
+
 
 class ShopRegistration(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -29,6 +32,9 @@ class ShopRegistration(models.Model):
     def __str__(self):
         return str(self.shop_name)
 
+    class Meta:
+        db_table = 'tbl_registered_shops'
+
 
 class ShopOwnerBankDetails(models.Model):
     shop_owner = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -36,6 +42,12 @@ class ShopOwnerBankDetails(models.Model):
     account_no = models.CharField(max_length=20)
     IFSC_code = models.CharField(max_length=11)
     PAN_number = models.CharField(max_length=11)
+
+    def __str__(self):
+        return self.shop_owner.name
+
+    class Meta:
+        db_table = 'tbl_shop_owner_bank_details'
 
 
 class ShopFeedback(models.Model):

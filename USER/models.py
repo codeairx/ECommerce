@@ -10,3 +10,9 @@ class UserProfile(models.Model):
     phone_number = models.CharField(max_length=10)
     delivery_address1 = models.TextField(blank=True, null=True)
     delivery_address2 = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'tbl_user_profile'
