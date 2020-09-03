@@ -1,3 +1,10 @@
+#home-side-img img {
+    max-height: 100px;
+    max-width: 100px;
+    padding: 5px;
+    margin: 5px;
+}
+
 body {
     background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
     height: 100%;
@@ -19,7 +26,7 @@ body {
 }
 
 .box-hover:hover {
-    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+    box-shadow: 10px 10px 16px 0 rgba(0, 0, 0, 0.2), 20px 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
 
 .home-card-img {
@@ -57,3 +64,16 @@ body {
     }
 }
 
+.img-card {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.detail-page-img {
+    padding: 10px;
+    height: 380px;
+    width: auto;
+    max-width: 500px;
+    position: relative;
+    border: 1px solid #f0f0f0;
+}

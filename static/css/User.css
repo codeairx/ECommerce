@@ -1,0 +1,17 @@
+#cart-box {
+    height: 400px;
+}
+
+body {
+    background-color: #eee;
+    font-family: 'Calibri', sans-serif !important
+}
+
+.card .card-header {
+    background-color: #fff;
+    border-bottom: none;
+    padding: 24px;
+    border-bottom: 1px solid #f6f7fb;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px
+}

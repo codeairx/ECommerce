@@ -64,10 +64,29 @@ def product_list(request):
 
 @login_required
 @user_passes_test(lambda u: u.is_seller, login_url='/seller/user-register/')
+def upload_product_image(request, pk):
+    if request.method == 'POST':
+        postForm = AddImageForm(request.POST, request.FILES)
+        form = postForm.save(commit=False)
+        form.product = Product.objects.get(pk=pk)
+        form.save()
+        return redirect('add_product_image', pk)
+    else:
+        getForm = AddImageForm()
+        images = ProductImages.objects.filter(product_id=pk)
+        context = {
+            'id': pk,
+            'form': getForm,
+            'images': images
+        }
+        return render(request, 'product/add_images.html', context)
+
+
+@login_required
+@user_passes_test(lambda u: u.is_seller, login_url='/seller/user-register/')
 def product_stock_update(request, pk):
     product = Product.objects.get(pk=pk)
     shop = ShopRegistration.objects.get(owner_id=request.user.id)
-    print(shop.id)
 
     if request.method == 'POST':
         postForm = StokeUpdateForm(request.POST, instance=product)
@@ -97,7 +116,7 @@ def update_product_info(request, pk):
     # POST METHODS
     if request.method == 'POST':
         # MOBILE
-        if product.product_category.category_name == 'Mobile':
+        if product.product_type == 'Smart Phones':
             try:
                 postForm = MobileSpecificationForm(request.POST,
                                                    instance=MobileDetails.objects.get(product_id=pk))
@@ -113,7 +132,7 @@ def update_product_info(request, pk):
                 return HttpResponse('err')
 
         # LAPTOP
-        elif product.product_category.category_name == 'Laptop':
+        elif product.product_type == 'Laptop':
             try:
                 postForm = LaptopSpecificationForm(request.POST, instance=LaptopDetails.objects.get(product_id=pk))
             except LaptopDetails.DoesNotExist:
@@ -128,7 +147,7 @@ def update_product_info(request, pk):
                 return HttpResponse('err')
 
         # EARPHONES
-        elif product.product_type == 'earphone':
+        elif product.product_type == 'Earphone':
             try:
                 postForm = EarphoneForm(request.POST, instance=Earphones.objects.get(product_id=pk))
             except Earphones.DoesNotExist:
@@ -143,7 +162,7 @@ def update_product_info(request, pk):
                 return HttpResponse('err')
 
         # PHONE CHARGER
-        elif product.product_type == 'phone charger':
+        elif product.product_type == 'Phone Charger':
             try:
                 postForm = PhoneChargerForm(request.POST, instance=PhoneCharger.objects.get(product_id=pk))
             except PhoneCharger.DoesNotExist:
@@ -156,12 +175,42 @@ def update_product_info(request, pk):
                 return redirect('productlist')
             else:
                 return HttpResponse('err')
+
+        # POWER BANK
+        elif product.product_type == 'Power Bank':
+            try:
+                postForm = PowerBankForm(request.POST, instance=PowerBank.objects.get(product_id=pk))
+            except PowerBank.DoesNotExist:
+                postForm = PowerBankForm(request.POST)
+
+            if postForm.is_valid():
+                obj = postForm.save(commit=False)
+                obj.product = product
+                obj.save()
+                return redirect('productlist')
+            else:
+                return HttpResponse('error')
+
+        # PEN DRIVE
+        elif product.product_type == 'Pen Drive':
+            try:
+                postForm = PendriveForm(request.POST, instance=Pendrive.objects.get(product_id=pk))
+            except Pendrive.DoesNotExist:
+                postForm = PendriveForm(request.POST)
+
+            if postForm.is_valid():
+                obj = postForm.save(commit=False)
+                obj.product = product
+                obj.save()
+                return redirect('productlist')
+            else:
+                return HttpResponse('error')
+
     # GET METHODS
 
     else:
-
         # MOBILE
-        if product.product_category.category_name == 'Mobile':
+        if product.product_type == 'Smart Phones':
             try:
                 getForm = MobileSpecificationForm(instance=MobileDetails.objects.get(product_id=pk))
             except MobileDetails.DoesNotExist:
@@ -177,7 +226,7 @@ def update_product_info(request, pk):
             return render(request, 'product/product_info_update.html', context)
 
         # LAPTOP
-        elif product.product_category.category_name == 'Laptop':
+        elif product.product_type == 'Laptop':
             try:
                 getForm = LaptopSpecificationForm(instance=LaptopDetails.objects.get(product_id=pk))
             except LaptopDetails.DoesNotExist:
@@ -193,7 +242,7 @@ def update_product_info(request, pk):
             return render(request, 'product/product_info_update.html', context)
 
         # EARPHONE
-        elif product.product_type == 'earphone':
+        elif product.product_type == 'Earphone':
             try:
                 getForm = EarphoneForm(instance=Earphones.objects.get(product_id=pk))
             except Earphones.DoesNotExist:
@@ -209,11 +258,43 @@ def update_product_info(request, pk):
             return render(request, 'product/product_info_update.html', context)
 
         # PHONE CHARGER
-        elif product.product_type == 'phone charger':
+        elif product.product_type == 'Phone Charger':
             try:
                 getForm = PhoneChargerForm(instance=PhoneCharger.objects.get(product_id=pk))
             except PhoneCharger.DoesNotExist:
                 getForm = PhoneChargerForm()
+
+            product_name = Product.objects.get(pk=pk)
+
+            context = {
+                'form': getForm,
+                'id': pk,
+                'product_name': product_name
+            }
+            return render(request, 'product/product_info_update.html', context)
+
+        # POWER BANK
+        elif product.product_type == 'Power Bank':
+            try:
+                getForm = PowerBankForm(instance=PowerBank.objects.get(product_id=pk))
+            except PowerBank.DoesNotExist:
+                getForm = PowerBankForm()
+
+            product_name = Product.objects.get(pk=pk)
+
+            context = {
+                'form': getForm,
+                'id': pk,
+                'product_name': product_name
+            }
+            return render(request, 'product/product_info_update.html', context)
+
+        # PEN DRIVE
+        elif product.product_type == 'Pen Drive':
+            try:
+                getForm = PendriveForm(instance=Pendrive.objects.get(product_id=pk))
+            except Pendrive.DoesNotExist:
+                getForm = PendriveForm()
 
             product_name = Product.objects.get(pk=pk)
 

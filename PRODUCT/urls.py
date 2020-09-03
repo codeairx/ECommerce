@@ -8,4 +8,5 @@ urlpatterns = [
     path('product/info/<str:pk>/', views.product_stock_update, name='product_stoke_update'),
     path('product-live/', views.set_product_live, name='live-product'),
     path('category-filter/', views.filter_product_type, name='category filter'),
+    path('product-images-info/<str:pk>/', views.upload_product_image, name='add_product_image'),
 ]

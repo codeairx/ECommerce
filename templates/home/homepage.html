@@ -32,7 +32,7 @@
     </div>
 
     <div>
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide p-2" data-ride="carousel">
             <div class="carousel-inner">
                 {% for image in carousel_img %}
                     <div class="carousel-item {% if forloop.first %} active {% endif %}">
@@ -50,12 +50,12 @@
             </a>
         </div>
 
-        <div class="mt-2">
+        <div>
             <div class="row no-gutters">
                 <div class="col-12 p-3 bg-light"><h4><b>Latest Products</b></h4></div>
                 {% for product in products %}
                     <div class="col-6 col-sm-6 col-md-4 col-lg-2">
-                        <a href="#" class="anchor-class">
+                        <a href="{% url 'product_detail_page' product.id %}" class="anchor-class">
                             <div class="card box-hover">
                                 <img class="home-card-img" src="{{ product.product_home_img.url }}"
                                      alt="{{ product.product_name }}">

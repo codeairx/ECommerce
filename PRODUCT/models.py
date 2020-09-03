@@ -43,7 +43,20 @@ class Product(models.Model):
         db_table = 'tbl_product'
 
 
+class ProductImages(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    images = models.ImageField(upload_to='product_details_page_images', null=True, blank=True)
+
+    def __str__(self):
+        return self.product.product_name
+
+    class Meta:
+        db_table = 'tbl_images_for_detail_page'
+
+
 # MOBILE SECTION START
+
+
 class MobileDetails(models.Model):
     RAM_TYPES = [
         ('LPDDR3', 'LPDDR3'),
@@ -196,7 +209,6 @@ class LaptopDetails(models.Model):
     processor = models.CharField(max_length=255)
     RAM = models.IntegerField()
     storage = models.CharField(max_length=100)
-    price = models.BigIntegerField()
 
     def __str__(self):
         return self.product.brand + self.model_name

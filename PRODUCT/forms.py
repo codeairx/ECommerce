@@ -2,11 +2,22 @@ from django import forms
 from .models import *
 
 
+class AddImageForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(AddImageForm, self).__init__(*args, **kwargs)
+        self.fields['images'].required = True
+
+    class Meta:
+        model = ProductImages
+        fields = '__all__'
+        exclude = ['product']
+
+
 class StokeUpdateForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
-        exclude = ['product_shop', 'is_product_live']
+        exclude = ['product_shop', 'is_product_live', 'product_type', 'product_category']
 
 
 class MobileSpecificationForm(forms.ModelForm):

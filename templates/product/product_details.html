@@ -1,0 +1,48 @@
+{% extends 'base/base1.html' %}
+
+{% block title %}
+    <title>{{ product.product_name }}</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="bg-light">
+        <div class="row no-gutters pt-3">
+            <div class="d-none d-md-none d-lg-block col-md-1 text-center ml-3">
+                {% for image in product_images %}
+                    <div class="img-thumbnail">
+                        <div id="home-side-img">
+                            <img src="{{ image.images.url }}" alt="{{ product.product_name }}"
+                                 onclick="changeImage(this.src)">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    <div class="card-body img-card">
+                        <div id="main-img">
+                            <img src="{{ product.product_home_img.url }}" class="detail-page-img"
+                                 alt="{{ product.product_name }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="img-card">
+                            <button type="submit" class="btn btn-outline-primary m-3">ADD TO CART</button>
+                            <button type="button" class="btn btn-outline-success m-3">BUY NOW</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="ml-5">
+                    <div>
+                        <h4>{{ product.product_name }}</h4>
+                    </div>
+                    <div>
+                        <h5>{{ details }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

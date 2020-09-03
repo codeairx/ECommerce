@@ -19,3 +19,7 @@ def user_profile(request):
         print(request.user)
         form = ProfileForm(instance=UserProfile.objects.get(user=request.user))
         return render(request, 'user/profile.html', {'form': form})
+
+
+def cart(request):
+    return render(request, 'user/cart.html')
