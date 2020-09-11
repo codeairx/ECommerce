@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login, authenticate
 from .forms import UserCreateForm, UserLoginForm
+from USER.models import UserCart
 
 User = get_user_model()
 
@@ -24,7 +25,18 @@ def login_user(request):
                 elif user.is_staff and not user.is_superuser:
                     return redirect('staff_home')
                 else:
-                    return redirect('homepage')
+                    # fetch data from session to cart
+                    cart_items = request.session.get('cart')
+                    try:
+                        for item in cart_items:
+                            UserCart.objects.update_or_create(
+                                user=request.user,
+                                cart_item_id=item['pk'],
+                                quantity=item['quantity']
+                            )
+                        return redirect('homepage')
+                    except TypeError:
+                        return redirect('homepage')
             else:
                 return redirect('loginpage')
     else:
