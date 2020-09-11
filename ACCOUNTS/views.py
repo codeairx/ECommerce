@@ -25,7 +25,6 @@ def login_user(request):
                 elif user.is_staff and not user.is_superuser:
                     return redirect('staff_home')
                 else:
-                    # fetch data from session to cart
                     cart_items = request.session.get('cart')
                     try:
                         for item in cart_items:
@@ -55,7 +54,18 @@ def signup_user(request):
                 )
                 user.save()
                 login(request, user)
-                return redirect('homepage')
+
+                cart_items = request.session.get('cart')
+                try:
+                    for item in cart_items:
+                        UserCart.objects.update_or_create(
+                            user=request.user,
+                            cart_item_id=item['pk'],
+                            quantity=item['quantity']
+                        )
+                    return redirect('homepage')
+                except (TypeError, ValueError):
+                    return redirect('homepage')
             else:
                 return redirect('loginpage')
         else:
