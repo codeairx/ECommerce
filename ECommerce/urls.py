@@ -13,6 +13,7 @@ urlpatterns = [
     path('seller/', include('SELLER.urls')),
     path('user/', include('USER.urls')),
     path('product/', include('PRODUCT.urls')),
+    path('order/', include('ORDER.urls')),
 
     # PASSWORD RESET URLS
     path(

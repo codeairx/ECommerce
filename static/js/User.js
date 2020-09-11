@@ -4,21 +4,10 @@ document.getElementById('add-to-cart').addEventListener('click', function () {
     $.ajax({
         url: '/user/cart-item/',
         data: {'pk': pk},
+        async: true,
         dataType: 'json',
         method: 'GET',
     });
-
-    var values = [];
-    var cart_items = localStorage.getItem('cart_item');
-    if (cart_items == null) {
-        values.push(pk);
-        localStorage.setItem('cart_item', values);
-    } else {
-        values.push(localStorage.getItem('cart_item'));
-        values.push(pk);
-        localStorage.setItem('cart_item', values);
-        console.log(localStorage.getItem('cart_item'))
-    }
 });
 
 

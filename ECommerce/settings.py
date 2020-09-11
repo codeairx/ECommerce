@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'USER.apps.UserConfig',
     'ADMIN.apps.AdminConfig',
     'STAFF.apps.StaffConfig',
+    'ORDER.apps.OrderConfig',
 
     'widget_tweaks',
 ]

@@ -10,43 +10,39 @@
 
         <div class="card">
             <div class="card-header">
-                {% if cart_items %}
-                    <h4>Cart ({{ cart_items.count }})</h4>
-                {% else %}
-                    <h4>Cart</h4>
-                {% endif %}
+                <h4>Cart</h4>
             </div>
 
             {% if cart_items %}
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 col-md-8 p-0">
-                            {% for item in cart_items %}
+                            {% for item, values in cart_items.items %}
                                 <div class="cart-body">
 
                                     <div class="row no-gutters">
 
                                         <div id="cart-item" class="col-4 col-md-3 col-lg-2">
-                                            <img src="{{ item.cart_item.product_home_img.url }}" alt="{{ item.cart_item.product_name }}"/>
+                                            <img src="{{ item.product_home_img.url }}" alt="{{ item.product_name }}"/>
                                         </div>
 
                                         <div class="col-8 col-md-9 col-lg-10">
                                             <div>
-                                                <h5>{{ item.cart_item.product_name }}</h5>
-                                                <h5>&#x20B9; {{ item.cart_item.product_selling_price }}</h5>
+                                                <h5>{{ item.product_name }}</h5>
+                                                <h5>&#x20B9; {{ item.product_selling_price }}</h5>
                                             </div>
 
                                             <div>
                                                 <h6>
                                                     Quantity:
-                                                    <button class="btn btn-success rounded-circle" onclick="changeQuantity({{ item.cart_item.id }}, 'increment')">+</button>
-                                                    <input class="text-center" type="text" value="{{ item.quantity }}" size="1" disabled/>
-                                                    <button class="btn btn-danger quantity rounded-circle" onclick="changeQuantity({{ item.cart_item.id }}, 'decrement')">&ndash;</button>
+                                                    <button class="btn btn-success rounded-circle" onclick="changeQuantity({{ item.id }}, 'increment')">+</button>
+                                                    <input class="text-center" type="text" value="{{ values }}" size="1" disabled/>
+                                                    <button class="btn btn-danger quantity rounded-circle" onclick="changeQuantity({{ item.id }}, 'decrement')">&ndash;</button>
                                                 </h6>
                                             </div>
 
                                             <div>
-                                                <button onclick="removeCartItem({{ item.cart_item.id }})" class="btn btn-outline-danger">Remove</button>
+                                                <button onclick="removeCartItem({{ item.id }})" class="btn btn-outline-danger">Remove</button>
                                             </div>
                                         </div>
                                     </div>
@@ -59,7 +55,7 @@
                                 <div class="card-header" style="font-family: 'Noto Sans',sans-serif"><h4>PRICE DETAILS</h4></div>
                                 <div class="card-body">
                                     <div id="cart-price" class="d-flex">
-                                        <div class="text-left">Price ({{ cart_items.count }} item)</div>
+                                        <div class="text-left">Total Price</div>
                                         <div class="ml-auto">&#x20B9; {{ cart_price }}</div>
                                     </div>
                                 </div>
